@@ -69,10 +69,11 @@ def contract_check(contract_text, regulations):
     embeddings = embed_text_large(contract_text)
     logging.info("Embeddings generated for the contract text.")
 
-    response = client.beta.assistants.run(
+    response = client.beta.assistants.create_run(
     assistant_id=assistant_id,
     thread_id=thread.id,
-    function_call={"name": "contract_check", "arguments": {"contract_text": contract_text, "embeddings": embeddings}})
+    function_call={"name": "contract_check", "arguments": {"contract_text": contract_text, "embeddings": embeddings}}
+)
    
     return response
 
