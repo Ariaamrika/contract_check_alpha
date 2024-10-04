@@ -1,0 +1,16 @@
+os
+python-dotenv
+openai
+requests
+json
+time
+logging
+datetime
+PyMuPDF
+tensorflow
+keras
+keras-nlp
+transformers
+python-docx
+streamlit
+pandas
