@@ -127,29 +127,29 @@ def main():
             return
         
 
-        #generate a response from assistance 
+        # Wait for the run to complete
         run = client.beta.threads.runs.create(
-            assistant_id = assistant_id,
-            thread_id= thread.id
-        )
+        assistant_id=assistant_id,
+        thread_id=thread.id)
 
 
+        run = client.beta.threads.runs.retrieve(run_id=run.id,
+                                                    thread_id=thread.id)
+        print(run.status)
+
+# Check if the run was successful
+        if run.status == "completed":
+           messages = client.beta.threads.messages.list(
+        thread_id = thread.id)
+           assistant_response = ''
 
 
-        # Wait for the response
-        while response.status != "completed":
-            time.sleep(1)
-            try:
-                response = client.beta.assistants.retrieve(
-                    assistant_id = assistant_id,
-                    run_id = run.id                   
-                )
-            except Exception as e:
-                st.error(f"Error retrieving response: {e}")
-                return
-
-        # Display the assistant's response
-        st.text_area("Assistant Response", value=response.outputs[0].text)
+           for each in messages:
+                assistant_response = assistant_response + each.role + ":" + each.content[0].text.value
+                st.write("Run completed!")
+                st.text_area("Assistant Response", assistant_response)
+        elif run.status == "failed":
+            st.error("The assistant run failed.")
 
 def check_usage_limit():
     # Placeholder function to check usage limit
