@@ -1,3 +1,4 @@
+import toml
 import os
 import streamlit as st
 import openai
@@ -9,9 +10,17 @@ import pandas as pd
 from transformers import AutoTokenizer, TFAutoModel
 import tensorflow as tf
 
-load_dotenv()
+# Load TOML data
+with open("config.toml", "r") as toml_file:
+    config = toml.load(toml_file)
+# Set environment variables (if needed)
+os.environ["OPENAI_API_KEY"] = config["OPENAI_API_KEY"]
+os.environ["ASSISTANT_ID"] = config["ASSISTANT_ID"]
+
+# Access the variables in your code
 openai.api_key = os.environ.get("OPENAI_API_KEY")
 assistant_id = os.environ.get("ASSISTANT_ID")
+
 
 # Initialize OpenAI client
 client = openai.OpenAI()
