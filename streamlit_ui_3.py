@@ -10,11 +10,8 @@ import pandas as pd
 from transformers import AutoTokenizer, TFAutoModel
 import tensorflow as tf
 
-#openai.api_key = st.secrets["OPENAI_API_KEY"]
-#assistant_id = st.secrets["ASSISTANT_ID"]
-
-openai.api_key = os.getenv('OPENAI_API_KEY')
-assistant_id = os.getenv('ASSISTANT_ID')
+openai.api_key = st.secrets["OPENAI_API_KEY"]
+assistant_id = st.secrets["ASSISTANT_ID"]
 
 
 # Initialize OpenAI client
