@@ -60,7 +60,7 @@ def main():
         return
 
     # Upload contract file
-    uploaded_file = st.file_uploader("Upload Contract File")
+    uploaded_file = st.file_uploader("Upload Contract File In Word Format")
     user_message = st.text_input("Enter your message with the contract:")
 
     if uploaded_file is not None and user_message:
